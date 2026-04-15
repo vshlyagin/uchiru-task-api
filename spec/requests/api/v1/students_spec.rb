@@ -4,11 +4,11 @@ RSpec.describe 'Api::V1::Students', type: :request do
   path "/api/v1/schools/{school_id}/classes/{class_id}/students" do
     parameter name: :school_id, in: :path, type: :integer, example: 1
     parameter name: :class_id, in: :path, type: :integer, example: 1
-  
+
     get "List students" do
       tags "Students"
       produces "application/json"
-  
+
       response '200', 'Список студентов' do
         schema type: :object,
           properties: {
@@ -17,17 +17,17 @@ RSpec.describe 'Api::V1::Students', type: :request do
               items: { "$ref" => "#/components/schemas/Student" }
             }
           }
-  
+
         let(:school) { School.first || create(:school) }
         let(:klass) { SchoolClass.first || create(:school_class, school:) }
-  
+
         let(:school_id) { school.id }
         let(:class_id) { klass.id }
-  
+
         before do
           create(:student, school:, class: klass)
         end
-  
+
         run_test!
       end
     end

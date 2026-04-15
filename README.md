@@ -1,24 +1,13 @@
-# README
+# Uchiru Task API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+API для работы со школами, классами и учениками на Ruby on Rails + PostgreSQL. 
+Документация сгенерирована через `rswag` (OpenAPI 3.0.3).
 
-Things you may want to cover:
+## 🚀 Запуск проекта (Docker)
 
-* Ruby version
+```bash
+docker-compose build
 
-* System dependencies
+docker-compose up -d
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+docker-compose exec app rails db:create db:migrate db:seed
