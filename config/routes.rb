@@ -1,9 +1,17 @@
 Rails.application.routes.draw do
-  resources :students, only: %i[create destroy]
+  mount Rswag::Ui::Engine => '/api-docs'
+  mount Rswag::Api::Engine => '/api-docs'
 
-  resources :schools, only: [] do
-    resources :school_classes, only: :index do
-      resources :students, only: :index, module: :school_classes
+  root to: redirect('/api-docs')
+
+  namespace :api do
+    namespace :v1 do
+      resources :students, only: %i[create destroy]
+      resources :schools, only: [:index] do
+        resources :classes, only: :index do
+          resources :students, only: :index
+        end
+      end
     end
   end
 end
